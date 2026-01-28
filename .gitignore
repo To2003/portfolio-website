@@ -25,3 +25,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# edits
+CLEANUP_SUMMARY.md
+EXAMPLES_BEFORE_AFTER.md
+FINAL_REPORT.md

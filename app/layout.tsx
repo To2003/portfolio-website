@@ -7,6 +7,9 @@ import './globals.css'
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
+/**
+ * Root layout metadata for SEO and browser configuration.
+ */
 export const metadata: Metadata = {
   title: 'Portfolio | Developer',
   description: 'Personal portfolio showcasing my work and skills',
@@ -38,7 +41,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
+        {/* Page content wrapper */}
         {children}
+        {/* Vercel analytics tracking */}
         <Analytics />
       </body>
     </html>

@@ -3,25 +3,25 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "./language-context";
+import { LanguageToggle } from "./language-toggle"; // <--- IMPORTANTE: Importamos el botón
 
-// CONFIGURACIÓN: Cambia a 'false' si consigues empleo
 const IS_OPEN_TO_WORK = true;
 
 const socialLinks = [
   {
-    href: "https://github.com",
+    href: "https://github.com/To2003",
     icon: Github,
     label: "GitHub",
     color: "hover:text-foreground hover:bg-foreground/10",
   },
   {
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/in/tomás-aguilar-8b3603262",
     icon: Linkedin,
     label: "LinkedIn",
     color: "hover:text-[oklch(0.65_0.15_230)] hover:bg-[oklch(0.65_0.15_230_/_0.1)]",
   },
   {
-    href: "mailto:hello@example.com",
+    href: "mailto:tomasaguilar.code@gmail.com",
     icon: Mail,
     label: "Email",
     color: "hover:text-[oklch(0.75_0.15_55)] hover:bg-[oklch(0.75_0.15_55_/_0.1)]",
@@ -32,16 +32,21 @@ export function Sidebar() {
   const { t } = useLanguage();
   
   return (
-    <aside className="flex flex-col justify-center h-full p-8 lg:p-12 gap-8">
+    <aside className="relative flex flex-col justify-center h-full p-8 lg:p-12 gap-8">
+      
+      {/* BOTÓN DE IDIOMA (NUEVA UBICACIÓN) */}
+      <div className="absolute top-4 right-4 lg:top-6 lg:right-6 z-20">
+        <LanguageToggle />
+      </div>
+
       <div className="space-y-6">
-        {/* Profile Picture with Animated Border */}
+        {/* Avatar */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="relative w-24 h-24 lg:w-32 lg:h-32 mb-6"
         >
-          {/* Animated glow ring */}
           <div 
             className="absolute inset-0 rounded-full"
             style={{
@@ -52,8 +57,6 @@ export function Sidebar() {
           >
             <div className="w-full h-full rounded-full bg-sidebar" />
           </div>
-          
-          {/* Avatar content */}
           <div className="absolute inset-[3px] rounded-full bg-secondary overflow-hidden">
             <div className="w-full h-full bg-gradient-to-br from-primary/30 to-primary/5 flex items-center justify-center">
               <span className="text-3xl lg:text-4xl font-bold text-primary">TA</span>
@@ -61,7 +64,7 @@ export function Sidebar() {
           </div>
         </motion.div>
 
-        {/* Name and Role */}
+        {/* Nombre y Rol */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -75,7 +78,7 @@ export function Sidebar() {
           </p>
         </motion.div>
 
-        {/* STATUS TAG (New Feature) */}
+        {/* Status Tag */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -113,7 +116,7 @@ export function Sidebar() {
         </motion.p>
       </div>
 
-      {/* Social Links with Color */}
+      {/* Social Links */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

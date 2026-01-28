@@ -1,7 +1,13 @@
 import * as React from 'react'
 
+// Tailwind's md breakpoint for detecting mobile vs desktop
 const MOBILE_BREAKPOINT = 768
 
+/**
+ * Custom hook to detect if the viewport is in mobile size range.
+ * Uses media query listener for reactive responsiveness.
+ * @returns Boolean indicating if viewport width is less than md breakpoint (768px)
+ */
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
 

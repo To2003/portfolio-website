@@ -1,13 +1,18 @@
 'use client'
 
-// Inspired by react-hot-toast library
+// Inspired by react-hot-toast library - lightweight toast notification system
 import * as React from 'react'
 
 import type { ToastActionElement, ToastProps } from '@/components/ui/toast'
 
+// Maximum number of toasts visible at once
 const TOAST_LIMIT = 1
+// Delay before completely removing toast from DOM after dismissal
 const TOAST_REMOVE_DELAY = 1000000
 
+/**
+ * Toast object structure with unique ID and optional UI elements.
+ */
 type ToasterToast = ToastProps & {
   id: string
   title?: React.ReactNode

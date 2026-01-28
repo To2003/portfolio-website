@@ -5,7 +5,8 @@ import * as RechartsPrimitive from 'recharts'
 
 import { cn } from '@/lib/utils'
 
-// Format: { THEME_NAME: CSS_SELECTOR }
+// Theme CSS selectors for chart styling
+// Maps theme names to their CSS selectors for dynamic theming
 const THEMES = { light: '', dark: '.dark' } as const
 
 export type ChartConfig = {
@@ -304,7 +305,10 @@ function ChartLegendContent({
   )
 }
 
-// Helper to extract item config from a payload.
+/**
+ * Extract chart configuration for a specific item from recharts payload.
+ * Used to get display metadata (label, color) for chart elements.
+ */
 function getPayloadConfigFromPayload(
   config: ChartConfig,
   payload: unknown,

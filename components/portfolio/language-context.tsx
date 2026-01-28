@@ -5,23 +5,24 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 type Language = "en" | "es";
 
 interface Translations {
-  // Sidebar
+  // Navigation and UI labels
   role: string;
   tagline: string;
   status_open: string;
   status_closed: string;
-  // Tabs
+  
+  // Main section tabs
   about: string;
   stack: string;
   projects: string;
   experience: string;
   education: string;
 
-  // Working on it
+  // Placeholder for unfinished sections
   working_title: string;
   working_desc: string;
   
-  // New About Section Keys (Reemplazan a los P1, P2, etc.)
+  // About section - bio and introduction content
   about_intro_1: string;
   about_intro_2: string;
   and: string;
@@ -37,13 +38,14 @@ interface Translations {
   dm: string;
   about_hobbies_2: string;
 
-  // Stack categories
+  // Technology categories for skills section
   languages: string;
   frontend: string;
   backend: string;
   tools: string;
   ai: string;
-  // Projects
+  
+  // Project portfolio descriptions
   projectEcommerce: string;
   projectEcommerceDesc: string;
   projectTask: string;
@@ -52,9 +54,9 @@ interface Translations {
   projectAnalyticsDesc: string;
   projectSocial: string;
   projectSocialDesc: string;
-  // Experience
+  
+  // Experience and education labels
   present: string;
-  // Education
   durationLabel: string;
 }
 
@@ -70,7 +72,7 @@ const translations: Record<Language, Translations> = {
     experience: "Experience",
     education: "Education",
 
-    // Working on it
+    // Placeholder for unfinished sections
     working_title: "Work in Progress",
     working_desc: "I'm currently building this section. Check back soon!",
     
@@ -120,7 +122,7 @@ const translations: Record<Language, Translations> = {
     experience: "Experiencia",
     education: "Estudios",
 
-    //Working on it
+    // Placeholder for unfinished sections
     working_title: "Trabajando en ello",
     working_desc: "Actualmente estoy construyendo esta sección. ¡Vuelve pronto!",
 
