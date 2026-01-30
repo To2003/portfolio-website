@@ -27,6 +27,4 @@ yarn-error.log*
 next-env.d.ts
 
 # edits
-CLEANUP_SUMMARY.md
-EXAMPLES_BEFORE_AFTER.md
-FINAL_REPORT.md
+/edits

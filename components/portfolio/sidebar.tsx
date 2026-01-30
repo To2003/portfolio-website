@@ -3,7 +3,7 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "./language-context";
-import { LanguageToggle } from "./language-toggle"; // <--- IMPORTANTE: Importamos el botón
+import { LanguageToggle } from "./language-toggle"; 
 
 const IS_OPEN_TO_WORK = true;
 

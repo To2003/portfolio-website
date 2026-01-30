@@ -4,6 +4,11 @@ import React from "react"
 import { motion } from "framer-motion";
 import { useLanguage } from "./language-context";
 
+/**
+ * REFACTORING NOTE: These animation variants are duplicated across multiple sections.
+ * Consider importing from @/constants/animations after centralization.
+ * @see REFACTORING_GUIDE.md for migration steps
+ */
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -63,7 +68,7 @@ export function AboutSection() {
         exit={{ opacity: 0 }}
         className="relative z-10 space-y-6"
       >
-        {/* Párrafo 1: Intro + Stack */}
+        {/* Introduction paragraph: career overview and primary tech stack */}
         <motion.p variants={item} className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
           {t.about_intro_1}{" "}
           <HighlightedText color="primary">React</HighlightedText>
@@ -72,7 +77,7 @@ export function AboutSection() {
           {t.about_intro_2}
         </motion.p>
         
-        {/* Párrafo 2: Educación (Coderhouse, Autodidacta, UADE) */}
+        {/* Education paragraph: courses, self-taught learning, and degree */}
         <motion.p variants={item} className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
           {t.about_edu_1}{" "}
           <HighlightedText color="purple">Coderhouse</HighlightedText>
@@ -85,12 +90,12 @@ export function AboutSection() {
           {"."}
         </motion.p>
 
-        {/* Párrafo 3: Proyectos Maker */}
+        {/* Hands-on approach: maker mindset and personal projects */}
         <motion.p variants={item} className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
           {t.about_maker}
         </motion.p>
 
-        {/* Párrafo 4: Hobbies (Hockey, D&D) */}
+        {/* Hobbies: competitive sports and tabletop gaming - strategic skills applied to code */}
         <motion.p variants={item} className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
           {t.about_hobbies_1}{" "}
           <HighlightedText color="primary">{t.hockey}</HighlightedText>

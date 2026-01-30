@@ -47,6 +47,12 @@ const techStack: Record<CategoryKey, TechItem[]> = {
   ],
 };
 
+/**
+ * Category color themes for tech stack display.
+ * REFACTORING NOTE: These colors are duplicated here and should be centralized.
+ * Import from @/constants/colors instead after centralization.
+ * @see REFACTORING_GUIDE.md for migration steps
+ */
 const categoryColors: Record<CategoryKey, { bg: string; border: string; text: string; glow: string }> = {
   languages: {
     bg: "bg-[oklch(0.85_0.15_90_/_0.1)]",
@@ -88,6 +94,12 @@ const categoryTitles: Record<CategoryKey, string> = {
   ai: "AI",
 };
 
+/**
+ * Maps category keys to translation keys.
+ * REFACTORING NOTE: This redundant mapping exists to maintain type safety.
+ * Consider removing if translation system is refactored.
+ * @see REFACTORING_GUIDE.md
+ */
 const categoryTitleKeys: Record<CategoryKey, "languages" | "frontend" | "backend" | "tools" | "ai"> = {
   languages: "languages",
   frontend: "frontend",
@@ -111,6 +123,12 @@ const item = {
   show: { opacity: 1, scale: 1, y: 0 },
 };
 
+/**
+ * Renders individual technology badge with animation and color theming.
+ * Applies scale effect on hover for interactive feedback.
+ * @param tech - Technology item with name and optional icon
+ * @param colors - Color theme object (bg, border, text, glow)
+ */
 function TechBadge({ tech, colors }: { tech: TechItem; colors: typeof categoryColors.languages }) {
   return (
     <motion.span
@@ -123,6 +141,13 @@ function TechBadge({ tech, colors }: { tech: TechItem; colors: typeof categoryCo
   );
 }
 
+/**
+ * Renders a technology category section with staggered animations.
+ * Automatically fetches category title from i18n translations.
+ * @param categoryKey - Category identifier (languages, frontend, backend, tools, ai)
+ * @param items - Array of technology items to display
+ * @param index - Section order for staggered animation delay
+ */
 function TechCategory({
   categoryKey,
   items,
