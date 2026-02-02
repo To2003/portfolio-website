@@ -1,120 +1,124 @@
 "use client";
 
 import React from "react"
-
 import { motion } from "framer-motion";
 import { useLanguage } from "./language-context";
 import { Award, ExternalLink } from "lucide-react";
 
+// Definimos la interfaz para usar las claves del contexto
 interface EducationItem {
-  title: { en: string; es: string };
+  titleKey: string;
   institution: string;
-  period: { start: string; end: string };
-  duration: { en: string; es: string };
-  description: { en: string; es: string };
+  period: string;
+  duration: { en: string; es: string }; // Mantenemos esto simple localmente
+  descKey: string;
   certificateImage: string;
   accentColor: string;
   link?: string;
 }
 
-const educationItems: EducationItem[] = [
-  {
-    title: { 
-      en: "Bachelor in IT Management", 
-      es: "Licenciatura en Gestión de Tecnología de la Información" 
-    },
-    institution: "UADE",
-    period: { start: "Present", end: "" },
-    duration: { en: "In Progress", es: "En Curso" },
-    description: {
-      en: "Degree focused on strategic management of technology, systems architecture, and business logic implementation.",
-      es: "Carrera enfocada en la gestión estratégica de tecnología, arquitectura de sistemas e implementación de lógica de negocios.",
-    },
-    certificateImage: "/certificates/uade.jpg", // Placeholder
-    accentColor: "oklch(0.75 0.12 180)", // Teal
-    link: "#",
-  },
-  {
-    title: { 
-      en: "Full Stack Programming", 
-      es: "Programación Full Stack" 
-    },
-    institution: "Coder House",
-    period: { start: "2022", end: "2023" },
-    duration: { en: "Bootcamp", es: "Bootcamp" },
-    description: {
-      en: "Intensive program covering React.js, Node.js, Firebase, and Database management. Built complete web applications from scratch.",
-      es: "Programa intensivo que cubre React.js, Node.js, Firebase y gestión de bases de datos. Construcción de aplicaciones web completas.",
-    },
-    certificateImage: "/certificates/fullstack.jpg", // Placeholder
-    accentColor: "oklch(0.7 0.15 300)", // Purple
-    link: "#",
-  },
-  {
-    title: { 
-      en: "Web Development", 
-      es: "Desarrollo Web" 
-    },
-    institution: "Coder House",
-    period: { start: "2022", end: "2022" },
-    duration: { en: "Course", es: "Curso" },
-    description: {
-      en: "Foundational course on HTML, CSS, SASS, Git, and JavaScript. Focused on responsive design and layout techniques.",
-      es: "Curso fundamental sobre HTML, CSS, SASS, Git y JavaScript. Enfocado en diseño responsivo y técnicas de maquetación.",
-    },
-    certificateImage: "/certificates/webdev.jpg", // Placeholder
-    accentColor: "oklch(0.65 0.20 320)", // Pink/Magenta
-    link: "#",
-  },
-  {
-    title: { 
-      en: "Robotics & Game Development", 
-      es: "Certificados en Robótica y Videojuegos" 
-    },
-    institution: "UTN",
-    period: { start: "2018", end: "2019" },
-    duration: { en: "Certifications", es: "Certificaciones" },
-    description: {
-      en: "Early certifications in Robotics and Video Game Programming that sparked my interest in logic and code.",
-      es: "Certificaciones tempranas en Robótica y Programación de Videojuegos que despertaron mi interés en la lógica y el código.",
-    },
-    certificateImage: "/certificates/utn.jpg", // Placeholder
-    accentColor: "oklch(0.85 0.15 90)", // Yellow
-    link: "#",
-  },
-];
+export function EducationSection() {
+  const { t, language } = useLanguage();
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
+  // Ahora usamos las claves que definimos en language-context.tsx
+  const educationItems: EducationItem[] = [
+    {
+      titleKey: "edu_uade_title",
+      institution: "UADE",
+      period: "Present",
+      duration: { en: "In Progress", es: "En Curso" },
+      descKey: "edu_uade_desc",
+      certificateImage: "/certificates/uade.jpg",
+      accentColor: "oklch(0.75 0.12 180)", // Teal
+      link: "#",
     },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, x: -20 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
+    {
+      titleKey: "edu_coder_fullstack_title",
+      institution: "Coder House",
+      period: "2022 - 2023",
+      duration: { en: "Bootcamp", es: "Bootcamp" },
+      descKey: "edu_coder_fullstack_desc",
+      certificateImage: "/certificates/fullstack.jpg",
+      accentColor: "oklch(0.7 0.15 300)", // Purple
+      link: "#",
     },
-  },
-};
+    {
+      titleKey: "edu_coder_web_title",
+      institution: "Coder House",
+      period: "2022",
+      duration: { en: "Course", es: "Curso" },
+      descKey: "edu_coder_web_desc",
+      certificateImage: "/certificates/webdev.jpg",
+      accentColor: "oklch(0.65 0.20 320)", // Pink/Magenta
+      link: "#",
+    },
+    {
+      titleKey: "edu_utn_title",
+      institution: "UTN",
+      period: "2018 - 2019",
+      duration: { en: "Certifications", es: "Certificaciones" },
+      descKey: "edu_utn_desc",
+      certificateImage: "/certificates/utn.jpg",
+      accentColor: "oklch(0.85 0.15 90)", // Yellow
+      link: "#",
+    },
+  ];
 
-function EducationCard({ education, isLast }: { education: EducationItem; isLast: boolean }) {
-  const { language, t } = useLanguage();
-  const title = education.title[language];
-  const description = education.description[language];
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
+  return (
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      exit={{ opacity: 0 }}
+      className="relative"
+    >
+      {educationItems.map((education, index) => (
+        <EducationCard
+          key={`${education.institution}-${index}`}
+          education={education}
+          isLast={index === educationItems.length - 1}
+          language={language}
+          t={t}
+        />
+      ))}
+    </motion.div>
+  );
+}
+
+// Componente Tarjeta Extraído para limpieza
+function EducationCard({ 
+  education, 
+  isLast, 
+  language, 
+  t 
+}: { 
+  education: EducationItem; 
+  isLast: boolean; 
+  language: "en" | "es"; 
+  t: any 
+}) {
+  const item = {
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
+
+  // Obtenemos los textos usando las claves
+  const title = t[education.titleKey];
+  const description = t[education.descKey];
   const duration = education.duration[language];
+  const periodText = education.period === "Present" ? t.present : education.period;
 
   return (
     <motion.div variants={item} className="relative flex gap-6">
-      {/* Timeline line */}
+      {/* Línea de tiempo */}
       {!isLast && (
         <div
           className="absolute left-[11px] top-[28px] w-[2px] h-[calc(100%+24px)]"
@@ -122,7 +126,7 @@ function EducationCard({ education, isLast }: { education: EducationItem; isLast
         />
       )}
 
-      {/* Timeline dot */}
+      {/* Punto de la línea */}
       <div className="relative z-10 flex-shrink-0">
         <motion.div
           initial={{ scale: 0 }}
@@ -134,16 +138,13 @@ function EducationCard({ education, isLast }: { education: EducationItem; isLast
             backgroundColor: `${education.accentColor.replace(")", " / 0.1)")}`,
           }}
         >
-          <Award
-            className="w-3 h-3"
-            style={{ color: education.accentColor }}
-          />
+          <Award className="w-3 h-3" style={{ color: education.accentColor }} />
         </motion.div>
       </div>
 
-      {/* Content Card */}
+      {/* Tarjeta de Contenido */}
       <div className="flex-1 pb-10">
-        {/* Period badge */}
+        {/* Badge de Periodo */}
         <div
           className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium mb-3"
           style={{
@@ -151,32 +152,25 @@ function EducationCard({ education, isLast }: { education: EducationItem; isLast
             color: education.accentColor,
           }}
         >
-          {education.period.start} {education.period.end ? `- ${education.period.end}` : ""}
+          {periodText}
         </div>
 
-        {/* Card with certificate image */}
         <motion.div
           whileHover={{ y: -4, scale: 1.01 }}
           className="group relative p-5 rounded-xl bg-card border border-border hover:border-transparent transition-all duration-300"
         >
-          {/* Hover glow effect */}
+          {/* Efectos de Hover */}
           <div 
             className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
-            style={{
-              boxShadow: `0 0 40px ${education.accentColor.replace(')', ' / 0.15)')}`,
-            }}
+            style={{ boxShadow: `0 0 40px ${education.accentColor.replace(')', ' / 0.15)')}` }}
           />
-          
-          {/* Colored border on hover */}
           <div 
             className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-            style={{
-              border: `1px solid ${education.accentColor.replace(')', ' / 0.5)')}`,
-            }}
+            style={{ border: `1px solid ${education.accentColor.replace(')', ' / 0.5)')}` }}
           />
 
           <div className="flex flex-col md:flex-row gap-5">
-            {/* Certificate Image Placeholder / Icon */}
+            {/* Imagen del Certificado (Placeholder) */}
             <div 
               className="relative w-full md:w-48 h-32 rounded-lg overflow-hidden flex-shrink-0 bg-gradient-to-br flex items-center justify-center"
               style={{
@@ -187,11 +181,9 @@ function EducationCard({ education, isLast }: { education: EducationItem; isLast
                 className="w-12 h-12 transition-transform duration-300 group-hover:scale-110"
                 style={{ color: education.accentColor }}
               />
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
             </div>
 
-            {/* Info */}
+            {/* Información */}
             <div className="flex-1 space-y-2">
               <div className="flex items-start justify-between gap-2">
                 <div>
@@ -221,11 +213,8 @@ function EducationCard({ education, isLast }: { education: EducationItem; isLast
                 {description}
               </p>
 
-              {/* Duration badge */}
               <div className="flex items-center gap-2 pt-1">
-                <span
-                  className="text-xs px-2.5 py-1 rounded-md bg-secondary/50 text-muted-foreground border border-border/50"
-                >
+                <span className="text-xs px-2.5 py-1 rounded-md bg-secondary/50 text-muted-foreground border border-border/50">
                   {t.durationLabel}: {duration}
                 </span>
               </div>
@@ -233,27 +222,6 @@ function EducationCard({ education, isLast }: { education: EducationItem; isLast
           </div>
         </motion.div>
       </div>
-    </motion.div>
-  );
-}
-
-export function EducationSection() {
-  return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      exit={{ opacity: 0 }}
-      className="relative"
-    >
-      {educationItems.map((education, index) => (
-        <EducationCard
-          // FIX: Usamos el index para garantizar que la Key sea única siempre
-          key={`${education.institution}-${index}`}
-          education={education}
-          isLast={index === educationItems.length - 1}
-        />
-      ))}
     </motion.div>
   );
 }
