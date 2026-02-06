@@ -5,7 +5,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 type Language = "en" | "es";
 
 interface Translations {
-  // UI General
+  // Navigation and UI labels
   role: string;
   tagline: string;
   status_open: string;
@@ -13,19 +13,19 @@ interface Translations {
   present: string;
   durationLabel: string;
   view_certificate: string;
-
-  // Tabs
+  
+  // Main section tabs
   about: string;
   stack: string;
   projects: string;
   experience: string;
   education: string;
 
-  // Placeholder
+  // Placeholder for unfinished sections
   working_title: string;
   working_desc: string;
-
-  // About Section
+  
+  // About section
   about_intro_1: string;
   about_intro_2: string;
   and: string;
@@ -41,18 +41,20 @@ interface Translations {
   dm: string;
   about_hobbies_2: string;
 
-  // Stack Categories
+  // Technology categories
   languages: string;
   frontend: string;
   backend: string;
   tools: string;
   ai: string;
-
-  // --- PROYECTOS (Smash Bar) ---
+  
+  // --- REAL PROJECTS ---
   project_smash_title: string;
   project_smash_desc: string;
+  project_camellia_title: string;
+  project_camellia_desc: string;
 
-  // --- EXPERIENCIA (CV) ---
+  // --- EXPERIENCE DATA (CV) ---
   exp_dgsisan_imp_role: string;
   exp_dgsisan_imp_desc: string;
   exp_dgsisan_support_role: string;
@@ -62,7 +64,7 @@ interface Translations {
   exp_sanluis_role: string;
   exp_sanluis_desc: string;
 
-  // --- EDUCACIÓN (CV) ---
+  // --- EDUCATION DATA (CV) ---
   edu_uade_title: string;
   edu_uade_desc: string;
   edu_coder_fullstack_title: string;
@@ -93,8 +95,8 @@ const translations: Record<Language, Translations> = {
 
     working_title: "Work in Progress",
     working_desc: "I'm currently building this section. Check back soon!",
-
-    // About
+    
+    // About Section
     about_intro_1: "I'm a Developer who loves the intersection of logic and creativity. At 22, I specialize in building modern web applications with",
     about_intro_2: ", always looking for the smartest way to solve a problem—whether it's automating workflows with AI or building a dynamic catalog website.",
     and: " and ",
@@ -110,18 +112,20 @@ const translations: Record<Language, Translations> = {
     dm: "D&D Dungeon Master",
     about_hobbies_2: ". I bring the same strategic thinking and storytelling skills from the game table to my development projects.",
 
-    // Stack
+    // Categories
     languages: "Languages",
     frontend: "Frontend",
     backend: "Backend",
     tools: "Tools & Platforms",
     ai: "AI Tools & Platforms",
-
-    // --- PROYECTOS ---
+    
+    // --- PROJECTS ---
     project_smash_title: "Smash Bar Website",
     project_smash_desc: "A modern, responsive website for a local bar featuring a digital menu, location services, and brand identity showcase. Built with a focus on performance and SEO.",
+    project_camellia_title: "Camellia Bakery",
+    project_camellia_desc: "A warm and inviting website for a boutique bakery. Features a visual product gallery, brand storytelling, and an elegant responsive design that reflects the shop's aesthetic.",
 
-    // --- EXPERIENCIA ---
+    // --- EXPERIENCE ---
     exp_dgsisan_imp_role: "Systems Implementation Analyst",
     exp_dgsisan_imp_desc: "Led the implementation of health information systems across medical centers. Coordinated with staff to ensure smooth adoption of digital tools and provided on-site training.",
     exp_dgsisan_support_role: "Technical Support",
@@ -131,7 +135,7 @@ const translations: Record<Language, Translations> = {
     exp_sanluis_role: "Systems Intern",
     exp_sanluis_desc: "Managed the computer lab during extracurricular hours and assisted English teachers with technological needs. Handled audiovisual documentation.",
 
-    // --- EDUCACIÓN ---
+    // --- EDUCATION ---
     edu_uade_title: "Bachelor in IT Management",
     edu_uade_desc: "Degree focused on strategic management of technology, systems architecture, and business logic implementation.",
     edu_coder_fullstack_title: "Full Stack Programming",
@@ -161,7 +165,7 @@ const translations: Record<Language, Translations> = {
     working_title: "Trabajando en ello",
     working_desc: "Actualmente estoy construyendo esta sección. ¡Vuelve pronto!",
 
-    // About
+    // About Section
     about_intro_1: "Soy un desarrollador apasionado por la intersección entre lógica y creatividad. A mis 22 años, me especializo en crear aplicaciones web modernas con",
     about_intro_2: ", siempre buscando la forma más inteligente de resolver problemas, ya sea automatizando flujos con IA o creando catálogos web dinámicos.",
     and: " y ",
@@ -177,18 +181,20 @@ const translations: Record<Language, Translations> = {
     dm: "Dungeon Master de D&D",
     about_hobbies_2: "a nivel competitivo. Llevo el mismo pensamiento estratégico y narrativo de la mesa de juego a mis proyectos de desarrollo.",
 
-    // Stack
+    // Categorias
     languages: "Lenguajes",
     frontend: "Frontend",
     backend: "Backend",
     tools: "Herramientas",
     ai: "Herramientas de IA",
 
-    // --- PROYECTOS ---
+    // --- PROJECTS ---
     project_smash_title: "Sitio Web Smash Bar",
     project_smash_desc: "Sitio web moderno y responsivo para un bar local. Incluye menú digital interactivo, integración de mapas y diseño de identidad de marca. Optimizado para SEO y rendimiento.",
+    project_camellia_title: "Camellia Bakery",
+    project_camellia_desc: "Un sitio web cálido y acogedor para una pastelería boutique. Cuenta con galería visual de productos, historia de la marca y un diseño elegante y responsivo que refleja la estética del local.",
 
-    // --- EXPERIENCIA ---
+    // --- EXPERIENCE ---
     exp_dgsisan_imp_role: "Analista de Implementación de Sistemas",
     exp_dgsisan_imp_desc: "Lideré la implementación de sistemas de información de salud en centros médicos. Coordiné con el personal para asegurar la adopción de herramientas digitales y brindé capacitación in situ.",
     exp_dgsisan_support_role: "Soporte Técnico",
@@ -198,7 +204,7 @@ const translations: Record<Language, Translations> = {
     exp_sanluis_role: "Pasantía en Sistemas",
     exp_sanluis_desc: "Encargado de la sala de computación en horario extracurricular y asistente técnico para profesores de inglés. Manejo de documentación audiovisual.",
 
-    // --- EDUCACIÓN ---
+    // --- EDUCATION ---
     edu_uade_title: "Licenciatura en Gestión de TI",
     edu_uade_desc: "Carrera enfocada en la gestión estratégica de tecnología, arquitectura de sistemas e implementación de lógica de negocios.",
     edu_coder_fullstack_title: "Programación Full Stack",
