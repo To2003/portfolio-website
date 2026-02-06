@@ -2,7 +2,7 @@
 
 import React from "react"
 import { motion } from "framer-motion";
-import { ExternalLink, Github, UtensilsCrossed } from "lucide-react";
+import { ExternalLink, Github, UtensilsCrossed, Coffee } from "lucide-react"; // <--- Agregamos Coffee
 import { useLanguage } from "./language-context";
 
 interface Project {
@@ -28,11 +28,22 @@ export function ProjectsSection() {
       tags: ["React", "Next.js", "Tailwind CSS", "Vercel"],
       links: {
         demo: "https://smash-bar-website.vercel.app/",
-        // REEMPLAZA ESTO CON TU REPO REAL CUANDO PUEDAS:
-        repo: "https://github.com/To2003/smashBar-website", 
+        repo: "https://github.com/To2003/smash-bar-website", 
       },
       icon: UtensilsCrossed,
       accentColor: "oklch(0.7 0.16 50)", // Naranja/Ambar
+    },
+    // NUEVO PROYECTO: CAMELLIA BAKERY
+    {
+      titleKey: "project_camellia_title",
+      descKey: "project_camellia_desc",
+      tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+      links: {
+        demo: "https://camellia-bakery-website.vercel.app/",
+        repo: "https://github.com/To2003/camellia-bakery-website", 
+      },
+      icon: Coffee, // Icono de Café/Pastelería
+      accentColor: "oklch(0.75 0.18 350)", // Rosa Pastel / Magenta suave
     },
   ];
 
