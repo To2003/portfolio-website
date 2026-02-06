@@ -85,40 +85,36 @@ export function EducationSection() {
           key={`${education.institution}-${index}`}
           education={education}
           isLast={index === educationItems.length - 1}
-          language={language}
-          t={t}
+
         />
       ))}
     </motion.div>
   );
 }
 
-// Componente Tarjeta Extraído para limpieza
+// Extracted card component for improved maintainability and reusability
 function EducationCard({ 
   education, 
-  isLast, 
-  language, 
-  t 
+  isLast 
 }: { 
   education: EducationItem; 
   isLast: boolean; 
-  language: "en" | "es"; 
-  t: any 
 }) {
+  const { language, t } = useLanguage();
   const item = {
     hidden: { opacity: 0, x: -20 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
   };
 
-  // Obtenemos los textos usando las claves
-  const title = t[education.titleKey];
-  const description = t[education.descKey];
+  // Retrieve localized text using translation keys
+  const title = (t as any)[education.titleKey];
+  const description = (t as any)[education.descKey];
   const duration = education.duration[language];
   const periodText = education.period === "Present" ? t.present : education.period;
 
   return (
     <motion.div variants={item} className="relative flex gap-6">
-      {/* Línea de tiempo */}
+      {/* Timeline divider */}
       {!isLast && (
         <div
           className="absolute left-[11px] top-[28px] w-[2px] h-[calc(100%+24px)]"
@@ -126,7 +122,7 @@ function EducationCard({
         />
       )}
 
-      {/* Punto de la línea */}
+      {/* Timeline marker */}
       <div className="relative z-10 flex-shrink-0">
         <motion.div
           initial={{ scale: 0 }}

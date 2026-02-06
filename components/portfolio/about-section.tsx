@@ -26,7 +26,6 @@ const item = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut",
     }
   },
 };
@@ -47,7 +46,7 @@ function HighlightedText({ children, color = "primary" }: { children: React.Reac
 }
 
 export function AboutSection() {
-  const { t } = useLanguage();
+  const { t: translations } = useLanguage();
   
   return (
     <div className="relative">
@@ -70,38 +69,38 @@ export function AboutSection() {
       >
         {/* Introduction paragraph: career overview and primary tech stack */}
         <motion.p variants={item} className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-          {t.about_intro_1}{" "}
+          {translations.about_intro_1}{" "}
           <HighlightedText color="primary">React</HighlightedText>
-          {t.and}
+          {translations.and}
           <HighlightedText color="primary">TypeScript</HighlightedText>
-          {t.about_intro_2}
+          {translations.about_intro_2}
         </motion.p>
         
         {/* Education paragraph: courses, self-taught learning, and degree */}
         <motion.p variants={item} className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-          {t.about_edu_1}{" "}
+          {translations.about_edu_1}{" "}
           <HighlightedText color="purple">Coderhouse</HighlightedText>
-          {t.about_edu_2}{" "}
-          <HighlightedText color="orange">{t.self_taught}</HighlightedText>
-          {t.about_edu_3}{" "}
-          <HighlightedText color="yellow">{t.uade_degree}</HighlightedText>
-          {t.at}
+          {translations.about_edu_2}{" "}
+          <HighlightedText color="orange">{translations.self_taught}</HighlightedText>
+          {translations.about_edu_3}{" "}
+          <HighlightedText color="yellow">{translations.uade_degree}</HighlightedText>
+          {translations.at}
           <HighlightedText color="yellow">UADE</HighlightedText>
           {"."}
         </motion.p>
 
         {/* Hands-on approach: maker mindset and personal projects */}
         <motion.p variants={item} className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-          {t.about_maker}
+          {translations.about_maker}
         </motion.p>
 
         {/* Hobbies: competitive sports and tabletop gaming - strategic skills applied to code */}
         <motion.p variants={item} className="text-lg lg:text-xl text-muted-foreground leading-relaxed">
-          {t.about_hobbies_1}{" "}
-          <HighlightedText color="primary">{t.hockey}</HighlightedText>
-          {t.and}
-          <HighlightedText color="primary">{t.dm}</HighlightedText>
-          {t.about_hobbies_2}
+          {translations.about_hobbies_1}{" "}
+          <HighlightedText color="primary">{translations.hockey}</HighlightedText>
+          {translations.and}
+          <HighlightedText color="primary">{translations.dm}</HighlightedText>
+          {translations.about_hobbies_2}
         </motion.p>
       </motion.div>
     </div>

@@ -18,7 +18,6 @@ interface Project {
 }
 
 export function ProjectsSection() {
-  // @ts-ignore
   const { t } = useLanguage();
 
   const projects: Project[] = [
@@ -31,9 +30,9 @@ export function ProjectsSection() {
         repo: "https://github.com/To2003/smash-bar-website", 
       },
       icon: UtensilsCrossed,
-      accentColor: "oklch(0.7 0.16 50)", // Naranja/Ambar
+      accentColor: "oklch(0.7 0.16 50)",
     },
-    // NUEVO PROYECTO: CAMELLIA BAKERY
+    // Camellia Bakery - Pastry showcase project
     {
       titleKey: "project_camellia_title",
       descKey: "project_camellia_desc",
@@ -42,8 +41,8 @@ export function ProjectsSection() {
         demo: "https://camellia-bakery-website.vercel.app/",
         repo: "https://github.com/To2003/camellia-bakery-website", 
       },
-      icon: Coffee, // Icono de Café/Pastelería
-      accentColor: "oklch(0.75 0.18 350)", // Rosa Pastel / Magenta suave
+      icon: Coffee,
+      accentColor: "oklch(0.75 0.18 350)",
     },
   ];
 
@@ -62,8 +61,8 @@ export function ProjectsSection() {
       animate="show"
       className="grid grid-cols-1 md:grid-cols-2 gap-6"
     >
-      {projects.map((project, index) => (
-        <ProjectCard key={index} project={project} />
+      {projects.map((project) => (
+        <ProjectCard key={project.titleKey} project={project} />
       ))}
     </motion.div>
   );
