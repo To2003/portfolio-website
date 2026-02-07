@@ -21,6 +21,7 @@ export function ProjectsSection() {
   const { t } = useLanguage();
 
   const projects: Project[] = [
+    // Smash Bar - Bar website project
     {
       titleKey: "project_smash_title",
       descKey: "project_smash_desc",
