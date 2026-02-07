@@ -27,7 +27,7 @@ export function ProjectsSection() {
       tags: ["React", "Next.js", "Tailwind CSS", "Vercel"],
       links: {
         demo: "https://smash-bar-website.vercel.app/",
-        repo: "https://github.com/To2003/smash-bar-website", 
+        repo: "https://github.com/To2003/smashBar-website", 
       },
       icon: UtensilsCrossed,
       accentColor: "oklch(0.7 0.16 50)",
