@@ -2,7 +2,7 @@
 
 import React from "react"
 import { motion } from "framer-motion";
-import { ExternalLink, Github, UtensilsCrossed, Coffee } from "lucide-react"; // <--- Agregamos Coffee
+import { ExternalLink, Github, UtensilsCrossed, Coffee, Cookie } from "lucide-react"; // <--- Agregamos Cookie
 import { useLanguage } from "./language-context";
 
 interface Project {
@@ -31,7 +31,7 @@ export function ProjectsSection() {
         repo: "https://github.com/To2003/smashBar-website", 
       },
       icon: UtensilsCrossed,
-      accentColor: "oklch(0.7 0.16 50)",
+      accentColor: "oklch(0.7 0.16 50)", // Orange
     },
     // Camellia Bakery - Pastry showcase project
     {
@@ -43,7 +43,19 @@ export function ProjectsSection() {
         repo: "https://github.com/To2003/camellia-bakery-website", 
       },
       icon: Coffee,
-      accentColor: "oklch(0.75 0.18 350)",
+      accentColor: "oklch(0.75 0.18 350)", // Pink
+    },
+    // Flor De Antojitos - New Pastry project
+    {
+      titleKey: "project_flor_title",
+      descKey: "project_flor_desc",
+      tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+      links: {
+        demo: "https://flor-deantojitos-website.vercel.app/",
+        repo: "https://github.com/To2003/flor-deantojitos-website", 
+      },
+      icon: Cookie, // Icono de Galleta/Antojo
+      accentColor: "oklch(0.7 0.15 290)", // Purple/Lavender
     },
   ];
 

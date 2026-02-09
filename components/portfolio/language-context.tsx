@@ -53,6 +53,8 @@ interface Translations {
   project_smash_desc: string;
   project_camellia_title: string;
   project_camellia_desc: string;
+  project_flor_title: string;
+  project_flor_desc: string;
 
   // --- EXPERIENCE DATA (CV) ---
   exp_dgsisan_imp_role: string;
@@ -124,6 +126,8 @@ const translations: Record<Language, Translations> = {
     project_smash_desc: "A modern, responsive website for a local bar featuring a digital menu, location services, and brand identity showcase. Built with a focus on performance and SEO.",
     project_camellia_title: "Camellia Bakery",
     project_camellia_desc: "A warm and inviting website for a boutique bakery. Features a visual product gallery, brand storytelling, and an elegant responsive design that reflects the shop's aesthetic.",
+    project_flor_title: "Flor de Antojitos",
+    project_flor_desc: "A charming e-commerce site for a sweet treats business. Features a colorful product gallery, direct WhatsApp ordering integration, and a mobile-first design.",
 
     // --- EXPERIENCE ---
     exp_dgsisan_imp_role: "Systems Implementation Analyst",
@@ -193,7 +197,8 @@ const translations: Record<Language, Translations> = {
     project_smash_desc: "Sitio web moderno y responsivo para un bar local. Incluye menú digital interactivo, integración de mapas y diseño de identidad de marca. Optimizado para SEO y rendimiento.",
     project_camellia_title: "Camellia Bakery",
     project_camellia_desc: "Un sitio web cálido y acogedor para una pastelería boutique. Cuenta con galería visual de productos, historia de la marca y un diseño elegante y responsivo que refleja la estética del local.",
-
+    project_flor_title: "Flor de Antojitos",
+    project_flor_desc: "Un sitio de comercio electrónico encantador para un negocio de dulces. Cuenta con galería colorida de productos, integración de pedidos por WhatsApp y diseño mobile-first.",
     // --- EXPERIENCE ---
     exp_dgsisan_imp_role: "Analista de Implementación de Sistemas",
     exp_dgsisan_imp_desc: "Lideré la implementación de sistemas de información de salud en centros médicos. Coordiné con el personal para asegurar la adopción de herramientas digitales y brindé capacitación in situ.",
