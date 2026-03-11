@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans antialiased`}>
         {/* Page content wrapper */}
-        {children}
+        {children}   
         {/* Vercel analytics tracking */}
         <Analytics />
       </body>

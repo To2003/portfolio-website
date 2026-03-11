@@ -2,7 +2,15 @@
 
 import React from "react"
 import { motion } from "framer-motion";
-import { ExternalLink, Github, UtensilsCrossed, Coffee, Cookie } from "lucide-react"; // <--- Agregamos Cookie
+import { 
+  ExternalLink, 
+  Github, 
+  UtensilsCrossed, 
+  Coffee, 
+  Cookie, 
+  ShoppingBag, 
+  Image as ImageIcon 
+} from "lucide-react"; 
 import { useLanguage } from "./language-context";
 
 interface Project {
@@ -20,42 +28,66 @@ interface Project {
 export function ProjectsSection() {
   const { t } = useLanguage();
 
-  const projects: Project[] = [
-    // Smash Bar - Bar website project
+  // PROYECTOS COMPLETADOS (Meraki y Flor de Antojitos)
+  const completedProjects: Project[] = [
+    {
+      titleKey: "project_meraki_title", // Agregalo a tu language-context
+      descKey: "project_meraki_desc",   // Agregalo a tu language-context
+      tags: ["Next.js", "Sanity CMS", "Tailwind", "Framer Motion"],
+      links: {
+        demo: "https://bolsos-website.vercel.app/",
+        repo: "https://github.com/To2003/bolsos-website", 
+      },
+      icon: ShoppingBag,
+      accentColor: "oklch(0.65 0.12 20)", // Marrón elegante
+    },
+    {
+      titleKey: "project_gallery_title", // Agregalo a tu language-context
+      descKey: "project_gallery_desc",   // Agregalo a tu language-context
+      tags: ["Next.js", "Sanity CMS", "Tailwind", "Photo API"],
+      links: {
+        demo: "https://foto-gallery-website.vercel.app/", // Ajustá la URL si es otra
+        repo: "https://github.com/To2003/foto-gallery-website", 
+      },
+      icon: ImageIcon,
+      accentColor: "oklch(0.6 0.2 250)", // Blue
+    },
+    {
+      titleKey: "project_flor_title",
+      descKey: "project_flor_desc",
+      tags: ["React", "Next.js", "Sanity CMS", "Tailwind"],
+      links: {
+        demo: "https://flor-deantojitos-website.vercel.app/",
+        repo: "https://github.com/To2003/flor-deantojitos-website", 
+      },
+      icon: Cookie, 
+      accentColor: "oklch(0.7 0.15 290)", 
+    },
+  ];
+
+  // PROYECTOS EN DESARROLLO (Smash Bar y Camellia)
+  const inDevelopmentProjects: Project[] = [
     {
       titleKey: "project_smash_title",
       descKey: "project_smash_desc",
-      tags: ["React", "Next.js", "Tailwind CSS", "Vercel"],
+      tags: ["React", "Next.js", "Tailwind CSS"],
       links: {
         demo: "https://smash-bar-website.vercel.app/",
         repo: "https://github.com/To2003/smashBar-website", 
       },
       icon: UtensilsCrossed,
-      accentColor: "oklch(0.7 0.16 50)", // Orange
+      accentColor: "oklch(0.7 0.16 50)", 
     },
-    // Camellia Bakery - Pastry showcase project
     {
       titleKey: "project_camellia_title",
       descKey: "project_camellia_desc",
-      tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+      tags: ["React", "Next.js", "Tailwind CSS"],
       links: {
         demo: "https://camellia-bakery-website.vercel.app/",
         repo: "https://github.com/To2003/camellia-bakery-website", 
       },
       icon: Coffee,
-      accentColor: "oklch(0.75 0.18 350)", // Pink
-    },
-    // Flor De Antojitos - New Pastry project
-    {
-      titleKey: "project_flor_title",
-      descKey: "project_flor_desc",
-      tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
-      links: {
-        demo: "https://flor-deantojitos-website.vercel.app/",
-        repo: "https://github.com/To2003/flor-deantojitos-website", 
-      },
-      icon: Cookie, // Icono de Galleta/Antojo
-      accentColor: "oklch(0.7 0.15 290)", // Purple/Lavender
+      accentColor: "oklch(0.75 0.18 350)", 
     },
   ];
 
@@ -68,19 +100,49 @@ export function ProjectsSection() {
   };
 
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="grid grid-cols-1 md:grid-cols-2 gap-6"
-    >
-      {projects.map((project) => (
-        <ProjectCard key={project.titleKey} project={project} />
-      ))}
-    </motion.div>
+    <div className="space-y-16">
+      {/* SECCIÓN COMPLETADOS */}
+      <div>
+        <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          Proyectos Completados
+        </h2>
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {completedProjects.map((project) => (
+            <ProjectCard key={project.titleKey} project={project} />
+          ))}
+        </motion.div>
+      </div>
+
+      {/* SECCIÓN EN DESARROLLO */}
+      <div>
+        <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+          En Desarrollo
+        </h2>
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {inDevelopmentProjects.map((project) => (
+            <ProjectCard key={project.titleKey} project={project} />
+          ))}
+        </motion.div>
+      </div>
+    </div>
   );
 }
 
+// ... (Componente ProjectCard queda igual al que ya tenés)
 function ProjectCard({ project }: { project: Project }) {
   // @ts-ignore
   const { t } = useLanguage();
@@ -110,7 +172,6 @@ function ProjectCard({ project }: { project: Project }) {
         style={{ border: `1px solid ${project.accentColor.replace(")", " / 0.5)")}` }}
       />
 
-      {/* Header */}
       <div className="p-6 pb-0 flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <div
@@ -131,7 +192,6 @@ function ProjectCard({ project }: { project: Project }) {
           </h3>
         </div>
 
-        {/* Links */}
         <div className="flex gap-2">
           {project.links.repo && (
             <a
@@ -158,13 +218,11 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      {/* Description */}
       <div className="p-6 flex-1 flex flex-col">
         <p className="text-muted-foreground text-sm leading-relaxed mb-6">
           {description}
         </p>
 
-        {/* Tags */}
         <div className="mt-auto flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
