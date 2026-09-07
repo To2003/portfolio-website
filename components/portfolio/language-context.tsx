@@ -8,12 +8,15 @@ interface Translations {
   // Navigation and UI labels
   role: string;
   tagline: string;
+  location_line: string;
   status_open: string;
   status_closed: string;
   present: string;
   durationLabel: string;
   view_certificate: string;
-  
+  contact_cta: string;
+  download_cv: string;
+
   // Main section tabs
   about: string;
   stack: string;
@@ -78,12 +81,15 @@ interface Translations {
 const translations: Record<Language, Translations> = {
   en: {
     role: "Full Stack Developer",
-    tagline: "Bridging the gap between design and engineering.",
+    tagline: "Building AI-powered tools and e-commerce experiences that ship to real users.",
+    location_line: "Buenos Aires, Argentina · Remote",
     status_open: "Open to Work",
     status_closed: "Not Available",
     present: "Present",
     durationLabel: "Duration",
     view_certificate: "View Certificate",
+    contact_cta: "Get in touch",
+    download_cv: "Download CV",
 
     about: "About",
     stack: "Stack",
@@ -144,12 +150,15 @@ const translations: Record<Language, Translations> = {
   },
   es: {
     role: "Desarrollador Full Stack",
-    tagline: "Uniendo el diseño con la ingeniería de software.",
+    tagline: "Construyo herramientas con IA y e-commerce que llegan a usuarios reales.",
+    location_line: "Buenos Aires, Argentina · Remoto",
     status_open: "Busco Empleo",
     status_closed: "No Disponible",
     present: "Presente",
     durationLabel: "Duración",
     view_certificate: "Ver Certificado",
+    contact_cta: "Contactame",
+    download_cv: "Descargar CV",
 
     about: "Sobre Mí",
     stack: "Tecnologías",

@@ -1,9 +1,10 @@
 "use client";
 
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Download } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "./language-context";
-import { LanguageToggle } from "./language-toggle"; 
+import { LanguageToggle } from "./language-toggle";
+import { siteConfig } from "@/constants/site";
 
 const IS_OPEN_TO_WORK = true;
 
@@ -76,6 +77,10 @@ export function Sidebar() {
           <p className="text-lg lg:text-xl text-primary font-semibold mt-1">
             {t.role}
           </p>
+          <p className="flex items-center gap-1.5 text-muted-foreground text-sm mt-1.5">
+            <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            {t.location_line}
+          </p>
         </motion.div>
 
         {/* Status Tag */}
@@ -115,6 +120,30 @@ export function Sidebar() {
           {t.tagline}
         </motion.p>
       </div>
+
+      {/* CTA Buttons */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.25 }}
+        className="flex flex-wrap gap-3"
+      >
+        <a
+          href={`mailto:${siteConfig.email}`}
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
+        >
+          <Mail className="w-4 h-4" aria-hidden="true" />
+          {t.contact_cta}
+        </a>
+        <a
+          href="/cv-tomas-aguilar.pdf"
+          download
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-secondary transition-colors"
+        >
+          <Download className="w-4 h-4" aria-hidden="true" />
+          {t.download_cv}
+        </a>
+      </motion.div>
 
       {/* Social Links */}
       <motion.div
