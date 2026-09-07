@@ -52,18 +52,6 @@ interface Translations {
   tools: string;
   ai: string;
   
-  // --- REAL PROJECTS ---
-  project_meraki_title: string;
-  project_meraki_desc: string;
-  project_gallery_title: string;
-  project_gallery_desc: string;
-  project_smash_title: string;
-  project_smash_desc: string;
-  project_camellia_title: string;
-  project_camellia_desc: string;
-  project_flor_title: string;
-  project_flor_desc: string;
-
   // --- EXPERIENCE DATA (CV) ---
   exp_dgsisan_imp_role: string;
   exp_dgsisan_imp_desc: string;
@@ -132,18 +120,6 @@ const translations: Record<Language, Translations> = {
     tools: "Tools & Platforms",
     ai: "AI Tools & Platforms",
     
-    // --- PROJECTS ---
-    project_meraki_title: "Meraki Bags",
-    project_meraki_desc: "Luxury handbag e-commerce. Features a dynamic catalog managed via Sanity CMS, WhatsApp integration, and a high-end minimalist aesthetic.",
-    project_gallery_title: "Photo Gallery",
-    project_gallery_desc: "Professional photo portfolio with cloud management. Allows the client to upload and organize albums in real-time using Sanity.",
-    project_smash_title: "Smash Bar Website",
-    project_smash_desc: "A modern, responsive website for a local bar featuring a digital menu, location services, and brand identity showcase.",
-    project_camellia_title: "Camellia Bakery",
-    project_camellia_desc: "A warm and inviting website for a boutique bakery. Features a visual product gallery and brand storytelling.",
-    project_flor_title: "Flor de Antojitos",
-    project_flor_desc: "E-commerce for a sweet treats business. Features a colorful gallery, direct WhatsApp ordering, and mobile-first design.",
-
     // --- EXPERIENCE ---
     exp_dgsisan_imp_role: "Systems Implementation Analyst",
     exp_dgsisan_imp_desc: "Led the implementation of health information systems across medical centers. Coordinated with staff to ensure smooth adoption of digital tools.",
@@ -210,18 +186,6 @@ const translations: Record<Language, Translations> = {
     tools: "Herramientas",
     ai: "Herramientas de IA",
 
-    // --- PROJECTS ---
-    project_meraki_title: "Meraki Bags",
-    project_meraki_desc: "E-commerce de bolsos de lujo. Incluye catálogo dinámico gestionado con Sanity CMS, pedidos por WhatsApp y una estética minimalista premium.",
-    project_gallery_title: "Photo Gallery",
-    project_gallery_desc: "Portfolio fotográfico profesional con gestión en la nube. Permite al cliente subir y organizar álbumes en tiempo real mediante Sanity.",
-    project_smash_title: "Sitio Web Smash Bar",
-    project_smash_desc: "Sitio web moderno y responsivo para un bar local. Incluye menú digital interactivo e integración de mapas. Optimizado para SEO.",
-    project_camellia_title: "Camellia Bakery",
-    project_camellia_desc: "Un sitio web cálido y acogedor para una pastelería boutique. Cuenta con galería visual de productos e historia de la marca.",
-    project_flor_title: "Flor de Antojitos",
-    project_flor_desc: "E-commerce encantador para un negocio de dulces. Cuenta con galería colorida, integración de WhatsApp y diseño mobile-first.",
-    
     // --- EXPERIENCE ---
     exp_dgsisan_imp_role: "Analista de Implementación de Sistemas",
     exp_dgsisan_imp_desc: "Lideré la implementación de sistemas de salud en centros médicos. Coordiné la adopción de herramientas digitales con el personal.",

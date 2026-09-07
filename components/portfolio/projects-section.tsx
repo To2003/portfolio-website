@@ -1,156 +1,106 @@
 "use client";
 
 import React from "react"
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { 
-  ExternalLink, 
-  Github, 
-  UtensilsCrossed, 
-  Coffee, 
-  Cookie, 
-  ShoppingBag, 
-  Image as ImageIcon 
-} from "lucide-react"; 
+import {
+  ExternalLink,
+  Github,
+  UtensilsCrossed,
+  Coffee,
+  Cookie,
+  ShoppingBag,
+  Code2,
+  Image as ImageIcon
+} from "lucide-react";
 import { useLanguage } from "./language-context";
+import { urlFor } from "@/sanity/lib/image";
+import type { Project, ProjectIcon } from "@/sanity/lib/types";
 
-interface Project {
-  titleKey: string;
-  descKey: string;
-  tags: string[];
-  links: {
-    demo: string;
-    repo: string;
-  };
-  icon: any; 
-  accentColor: string;
-}
+const ICONS: Record<ProjectIcon, typeof ShoppingBag> = {
+  ShoppingBag,
+  ImageIcon,
+  Cookie,
+  UtensilsCrossed,
+  Coffee,
+  Code2,
+};
 
-export function ProjectsSection() {
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+export function ProjectsSection({ projects }: { projects: Project[] }) {
   const { t } = useLanguage();
 
-  // PROYECTOS COMPLETADOS (Meraki y Flor de Antojitos)
-  const completedProjects: Project[] = [
-    {
-      titleKey: "project_meraki_title", // Agregalo a tu language-context
-      descKey: "project_meraki_desc",   // Agregalo a tu language-context
-      tags: ["Next.js", "Sanity CMS", "Tailwind", "Framer Motion"],
-      links: {
-        demo: "https://bolsos-website.vercel.app/",
-        repo: "https://github.com/To2003/bolsos-website", 
-      },
-      icon: ShoppingBag,
-      accentColor: "oklch(0.65 0.12 20)", // Marrón elegante
-    },
-    {
-      titleKey: "project_gallery_title", // Agregalo a tu language-context
-      descKey: "project_gallery_desc",   // Agregalo a tu language-context
-      tags: ["Next.js", "Sanity CMS", "Tailwind", "Photo API"],
-      links: {
-        demo: "https://foto-gallery-website.vercel.app/", // Ajustá la URL si es otra
-        repo: "https://github.com/To2003/foto-gallery-website", 
-      },
-      icon: ImageIcon,
-      accentColor: "oklch(0.6 0.2 250)", // Blue
-    },
-    {
-      titleKey: "project_flor_title",
-      descKey: "project_flor_desc",
-      tags: ["React", "Next.js", "Sanity CMS", "Tailwind"],
-      links: {
-        demo: "https://flor-deantojitos-website.vercel.app/",
-        repo: "https://github.com/To2003/flor-deantojitos-website", 
-      },
-      icon: Cookie, 
-      accentColor: "oklch(0.7 0.15 290)", 
-    },
-  ];
-
-  // PROYECTOS EN DESARROLLO (Smash Bar y Camellia)
-  const inDevelopmentProjects: Project[] = [
-    {
-      titleKey: "project_smash_title",
-      descKey: "project_smash_desc",
-      tags: ["React", "Next.js", "Tailwind CSS"],
-      links: {
-        demo: "https://smash-bar-website.vercel.app/",
-        repo: "https://github.com/To2003/smashBar-website", 
-      },
-      icon: UtensilsCrossed,
-      accentColor: "oklch(0.7 0.16 50)", 
-    },
-    {
-      titleKey: "project_camellia_title",
-      descKey: "project_camellia_desc",
-      tags: ["React", "Next.js", "Tailwind CSS"],
-      links: {
-        demo: "https://camellia-bakery-website.vercel.app/",
-        repo: "https://github.com/To2003/camellia-bakery-website", 
-      },
-      icon: Coffee,
-      accentColor: "oklch(0.75 0.18 350)", 
-    },
-  ];
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
+  const completedProjects = projects.filter((p) => p.status === "completed");
+  const inDevelopmentProjects = projects.filter((p) => p.status === "in-development");
 
   return (
     <div className="space-y-16">
-      {/* SECCIÓN COMPLETADOS */}
       <div>
         <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          Proyectos Completados
+          {t.completed_projects}
         </h2>
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
-          {completedProjects.map((project) => (
-            <ProjectCard key={project.titleKey} project={project} />
-          ))}
-        </motion.div>
+        {completedProjects.length > 0 ? (
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {completedProjects.map((project) => (
+              <ProjectCard key={project._id} project={project} />
+            ))}
+          </motion.div>
+        ) : (
+          <EmptyState />
+        )}
       </div>
 
-      {/* SECCIÓN EN DESARROLLO */}
       <div>
         <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          En Desarrollo
+          {t.in_development}
         </h2>
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
-          {inDevelopmentProjects.map((project) => (
-            <ProjectCard key={project.titleKey} project={project} />
-          ))}
-        </motion.div>
+        {inDevelopmentProjects.length > 0 ? (
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            {inDevelopmentProjects.map((project) => (
+              <ProjectCard key={project._id} project={project} />
+            ))}
+          </motion.div>
+        ) : (
+          <EmptyState />
+        )}
       </div>
     </div>
   );
 }
 
-// ... (Componente ProjectCard queda igual al que ya tenés)
-function ProjectCard({ project }: { project: Project }) {
-  // @ts-ignore
+function EmptyState() {
   const { t } = useLanguage();
-  // @ts-ignore
-  const title = t[project.titleKey];
-  // @ts-ignore
-  const description = t[project.descKey];
-  const Icon = project.icon;
+  return (
+    <p className="text-muted-foreground text-sm">{t.working_desc}</p>
+  );
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  const { language } = useLanguage();
+  const title = language === "es" ? project.titleEs : project.titleEn;
+  const description = language === "es" ? project.descriptionEs : project.descriptionEn;
+  const Icon = ICONS[project.icon] ?? Code2;
 
   const item = {
     hidden: { opacity: 0, y: 20 },
@@ -171,6 +121,18 @@ function ProjectCard({ project }: { project: Project }) {
         className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         style={{ border: `1px solid ${project.accentColor.replace(")", " / 0.5)")}` }}
       />
+
+      {project.image && (
+        <div className="relative w-full aspect-video bg-secondary/40 overflow-hidden">
+          <Image
+            src={urlFor(project.image).width(760).height(428).url()}
+            alt={title}
+            fill
+            sizes="(min-width: 1024px) 380px, 100vw"
+            className="object-cover"
+          />
+        </div>
+      )}
 
       <div className="p-6 pb-0 flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
@@ -193,23 +155,25 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <div className="flex gap-2">
-          {project.links.repo && (
+          {project.repoUrl && (
             <a
-              href={project.links.repo}
+              href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              aria-label={`${title} — código en GitHub`}
               title="Code"
             >
               <Github className="w-5 h-5" />
             </a>
           )}
-          {project.links.demo && (
+          {project.demoUrl && (
             <a
-              href={project.links.demo}
+              href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              aria-label={`${title} — ver demo en vivo`}
               title="Live Demo"
             >
               <ExternalLink className="w-5 h-5" />

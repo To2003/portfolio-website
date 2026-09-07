@@ -3,8 +3,9 @@
 import { Sidebar } from "./sidebar";
 import { MainContent } from "./main-content";
 import { LanguageProvider } from "./language-context";
+import type { Project } from "@/sanity/lib/types";
 
-export function PortfolioLayout() {
+export function PortfolioLayout({ projects }: { projects: Project[] }) {
   return (
     <LanguageProvider>
       {/* CAMBIO: 'overflow-hidden' solo en lg (Escritorio). En móvil dejamos que fluya. */}
@@ -49,7 +50,7 @@ export function PortfolioLayout() {
         {/* Main Content Area - Right Panel */}
         {/* CAMBIO: Quitamos h-screen en móvil para que crezca con el contenido */}
         <div className="relative z-10 flex-1 lg:h-screen lg:overflow-hidden">
-          <MainContent />
+          <MainContent projects={projects} />
         </div>
 
         <style jsx>{`

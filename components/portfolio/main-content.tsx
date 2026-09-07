@@ -8,11 +8,12 @@ import { StackSection } from "./stack-section";
 import { ProjectsSection } from "./projects-section";
 import { ExperienceSection } from "./experience-section";
 import { EducationSection } from "./education-section";
+import type { Project } from "@/sanity/lib/types";
 // Nota: Ya no importamos LanguageToggle aquí
 
 type Tab = "about" | "stack" | "projects" | "experience" | "education";
 
-export function MainContent() {
+export function MainContent({ projects }: { projects: Project[] }) {
   const [activeTab, setActiveTab] = useState<Tab>("about");
 
   return (
@@ -39,7 +40,7 @@ export function MainContent() {
               >
                 {activeTab === "about" && <AboutSection />}
                 {activeTab === "stack" && <StackSection />}
-                {activeTab === "projects" && <ProjectsSection />}
+                {activeTab === "projects" && <ProjectsSection projects={projects} />}
                 {activeTab === "experience" && <ExperienceSection />}
                 {activeTab === "education" && <EducationSection />}
               </motion.div>
