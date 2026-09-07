@@ -1,6 +1,8 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+
+const LANGUAGE_STORAGE_KEY = "portfolio-language";
 
 type Language = "en" | "es";
 
@@ -13,9 +15,9 @@ interface Translations {
   status_closed: string;
   present: string;
   durationLabel: string;
-  view_certificate: string;
   contact_cta: string;
   download_cv: string;
+  cv_unavailable: string;
 
   // Main section tabs
   about: string;
@@ -27,6 +29,9 @@ interface Translations {
   // Projects Section Titles
   completed_projects: string;
   in_development: string;
+  in_development_note: string;
+  filter_clear: string;
+  no_tag_matches: string;
 
   // Placeholder for unfinished sections
   working_title: string;
@@ -87,9 +92,9 @@ const translations: Record<Language, Translations> = {
     status_closed: "Not Available",
     present: "Present",
     durationLabel: "Duration",
-    view_certificate: "View Certificate",
     contact_cta: "Get in touch",
     download_cv: "Download CV",
+    cv_unavailable: "CV coming soon",
 
     about: "About",
     stack: "Stack",
@@ -99,6 +104,9 @@ const translations: Record<Language, Translations> = {
 
     completed_projects: "Completed Projects",
     in_development: "Work in Progress",
+    in_development_note: "Personal projects I'm still iterating on — code and live deploy are already up.",
+    filter_clear: "Show all",
+    no_tag_matches: "No projects match this filter.",
 
     working_title: "Work in Progress",
     working_desc: "I'm currently building this section. Check back soon!",
@@ -156,9 +164,9 @@ const translations: Record<Language, Translations> = {
     status_closed: "No Disponible",
     present: "Presente",
     durationLabel: "Duración",
-    view_certificate: "Ver Certificado",
     contact_cta: "Contactame",
     download_cv: "Descargar CV",
+    cv_unavailable: "CV próximamente",
 
     about: "Sobre Mí",
     stack: "Tecnologías",
@@ -168,6 +176,9 @@ const translations: Record<Language, Translations> = {
 
     completed_projects: "Proyectos Completados",
     in_development: "En Desarrollo",
+    in_development_note: "Proyectos personales en los que sigo iterando — el código y el deploy ya están online.",
+    filter_clear: "Ver todos",
+    no_tag_matches: "No hay proyectos con este filtro.",
 
     working_title: "Trabajando en ello",
     working_desc: "Actualmente estoy construyendo esta sección. ¡Vuelve pronto!",
@@ -228,7 +239,31 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>("en");
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+      if (stored === "en" || stored === "es") {
+        setLanguageState(stored);
+      }
+    } catch {
+      // localStorage no disponible (Safari privado, etc.) — se queda en el default.
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    try {
+      localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+    } catch {
+      // localStorage no disponible — el cambio de idioma igual funciona para esta sesión.
+    }
+  };
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t: translations[language] }}>

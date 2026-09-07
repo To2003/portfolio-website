@@ -107,6 +107,7 @@
   /* Firefox */
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
+  -webkit-overflow-scrolling: touch;
 }
 
 .custom-scrollbar:hover {

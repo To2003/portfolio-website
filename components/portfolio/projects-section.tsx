@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react"
+import React, { useState } from "react"
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -36,12 +36,42 @@ const container = {
 
 export function ProjectsSection({ projects }: { projects: Project[] }) {
   const { t } = useLanguage();
+  const [activeTag, setActiveTag] = useState<string | null>(null);
 
-  const completedProjects = projects.filter((p) => p.status === "completed");
-  const inDevelopmentProjects = projects.filter((p) => p.status === "in-development");
+  const allTags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort();
+
+  const matchesFilter = (p: Project) => activeTag === null || p.tags.includes(activeTag);
+  const completedProjects = projects.filter((p) => p.status === "completed" && matchesFilter(p));
+  const inDevelopmentProjects = projects.filter((p) => p.status === "in-development" && matchesFilter(p));
 
   return (
     <div className="space-y-16">
+      {allTags.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2">
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+              className={`text-xs font-medium px-2.5 py-1 rounded-md border transition-colors ${
+                activeTag === tag
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "text-muted-foreground border-border/50 hover:border-border hover:text-foreground"
+              }`}
+            >
+              {tag}
+            </button>
+          ))}
+          {activeTag && (
+            <button
+              onClick={() => setActiveTag(null)}
+              className="text-xs font-medium px-2.5 py-1 rounded-md text-muted-foreground hover:text-foreground underline underline-offset-2"
+            >
+              {t.filter_clear}
+            </button>
+          )}
+        </div>
+      )}
+
       <div>
         <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -56,19 +86,20 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             {completedProjects.map((project) => (
-              <ProjectCard key={project._id} project={project} />
+              <ProjectCard key={project._id} project={project} onTagClick={setActiveTag} />
             ))}
           </motion.div>
         ) : (
-          <EmptyState />
+          <EmptyState message={activeTag ? t.no_tag_matches : t.working_desc} />
         )}
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+        <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
           {t.in_development}
         </h2>
+        <p className="text-muted-foreground text-sm mb-6">{t.in_development_note}</p>
         {inDevelopmentProjects.length > 0 ? (
           <motion.div
             variants={container}
@@ -78,25 +109,28 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             {inDevelopmentProjects.map((project) => (
-              <ProjectCard key={project._id} project={project} />
+              <ProjectCard key={project._id} project={project} onTagClick={setActiveTag} />
             ))}
           </motion.div>
         ) : (
-          <EmptyState />
+          <EmptyState message={activeTag ? t.no_tag_matches : t.working_desc} />
         )}
       </div>
     </div>
   );
 }
 
-function EmptyState() {
-  const { t } = useLanguage();
-  return (
-    <p className="text-muted-foreground text-sm">{t.working_desc}</p>
-  );
+function EmptyState({ message }: { message: string }) {
+  return <p className="text-muted-foreground text-sm">{message}</p>;
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  onTagClick,
+}: {
+  project: Project;
+  onTagClick: (tag: string) => void;
+}) {
   const { language } = useLanguage();
   const title = language === "es" ? project.titleEs : project.titleEn;
   const description = language === "es" ? project.descriptionEs : project.descriptionEn;
@@ -189,9 +223,10 @@ function ProjectCard({ project }: { project: Project }) {
 
         <div className="mt-auto flex flex-wrap gap-2">
           {project.tags.map((tag) => (
-            <span
+            <button
               key={tag}
-              className="text-xs font-medium px-2.5 py-1 rounded-md border"
+              onClick={() => onTagClick(tag)}
+              className="text-xs font-medium px-2.5 py-1 rounded-md border hover:opacity-80 transition-opacity"
               style={{
                 backgroundColor: project.accentColor.replace(")", " / 0.05)") + "",
                 borderColor: project.accentColor.replace(")", " / 0.15)") + "",
@@ -199,7 +234,7 @@ function ProjectCard({ project }: { project: Project }) {
               }}
             >
               {tag}
-            </span>
+            </button>
           ))}
         </div>
       </div>

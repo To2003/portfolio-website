@@ -29,7 +29,7 @@ const socialLinks = [
   },
 ];
 
-export function Sidebar() {
+export function Sidebar({ hasCv }: { hasCv: boolean }) {
   const { t } = useLanguage();
   
   return (
@@ -135,14 +135,27 @@ export function Sidebar() {
           <Mail className="w-4 h-4" aria-hidden="true" />
           {t.contact_cta}
         </a>
-        <a
-          href="/cv-tomas-aguilar.pdf"
-          download
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-secondary transition-colors"
-        >
-          <Download className="w-4 h-4" aria-hidden="true" />
-          {t.download_cv}
-        </a>
+        {hasCv ? (
+          <a
+            href="/cv-tomas-aguilar.pdf"
+            download
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-secondary transition-colors"
+          >
+            <Download className="w-4 h-4" aria-hidden="true" />
+            {t.download_cv}
+          </a>
+        ) : (
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            title={t.cv_unavailable}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border text-muted-foreground text-sm font-semibold opacity-50 cursor-not-allowed"
+          >
+            <Download className="w-4 h-4" aria-hidden="true" />
+            {t.download_cv}
+          </button>
+        )}
       </motion.div>
 
       {/* Social Links */}

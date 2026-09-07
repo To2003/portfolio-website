@@ -5,11 +5,17 @@ import { MainContent } from "./main-content";
 import { LanguageProvider } from "./language-context";
 import type { Project } from "@/sanity/lib/types";
 
-export function PortfolioLayout({ projects }: { projects: Project[] }) {
+export function PortfolioLayout({
+  projects,
+  hasCv,
+}: {
+  projects: Project[];
+  hasCv: boolean;
+}) {
   return (
     <LanguageProvider>
       {/* CAMBIO: 'overflow-hidden' solo en lg (Escritorio). En móvil dejamos que fluya. */}
-      <div className="min-h-screen bg-background flex flex-col lg:flex-row relative lg:overflow-hidden">
+      <div className="min-h-dvh bg-background flex flex-col lg:flex-row relative lg:overflow-hidden">
         {/* Animated Background Glow */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           {/* Primary glow */}
@@ -43,13 +49,13 @@ export function PortfolioLayout({ projects }: { projects: Project[] }) {
 
         {/* Sticky Sidebar - Left Panel */}
         {/* CAMBIO: Sidebar relativa en móvil, sticky solo en LG */}
-        <div className="relative z-10 w-full lg:w-[320px] xl:w-[380px] lg:sticky lg:top-0 lg:h-screen border-b lg:border-b-0 lg:border-r border-border bg-sidebar/80 backdrop-blur-sm shrink-0">
-          <Sidebar />
+        <div className="relative z-10 w-full lg:w-[320px] xl:w-[380px] lg:sticky lg:top-0 lg:h-dvh border-b lg:border-b-0 lg:border-r border-border bg-sidebar/80 backdrop-blur-sm shrink-0">
+          <Sidebar hasCv={hasCv} />
         </div>
 
         {/* Main Content Area - Right Panel */}
         {/* CAMBIO: Quitamos h-screen en móvil para que crezca con el contenido */}
-        <div className="relative z-10 flex-1 lg:h-screen lg:overflow-hidden">
+        <div className="relative z-10 flex-1 lg:h-dvh lg:overflow-hidden">
           <MainContent projects={projects} />
         </div>
 

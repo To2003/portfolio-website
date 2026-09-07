@@ -12,7 +12,6 @@ interface EducationItem {
   period: string;
   duration: { en: string; es: string }; // Mantenemos esto simple localmente
   descKey: string;
-  certificateImage: string;
   accentColor: string;
   link?: string;
 }
@@ -28,7 +27,6 @@ export function EducationSection() {
       period: "Present",
       duration: { en: "In Progress", es: "En Curso" },
       descKey: "edu_uade_desc",
-      certificateImage: "/certificates/uade.jpg",
       accentColor: "oklch(0.75 0.12 180)", // Teal
       link: "#",
     },
@@ -38,7 +36,6 @@ export function EducationSection() {
       period: "2022 - 2023",
       duration: { en: "Bootcamp", es: "Bootcamp" },
       descKey: "edu_coder_fullstack_desc",
-      certificateImage: "/certificates/fullstack.jpg",
       accentColor: "oklch(0.7 0.15 300)", // Purple
       link: "#",
     },
@@ -48,7 +45,6 @@ export function EducationSection() {
       period: "2022",
       duration: { en: "Course", es: "Curso" },
       descKey: "edu_coder_web_desc",
-      certificateImage: "/certificates/webdev.jpg",
       accentColor: "oklch(0.65 0.20 320)", // Pink/Magenta
       link: "#",
     },
@@ -58,7 +54,6 @@ export function EducationSection() {
       period: "2018 - 2019",
       duration: { en: "Certifications", es: "Certificaciones" },
       descKey: "edu_utn_desc",
-      certificateImage: "/certificates/utn.jpg",
       accentColor: "oklch(0.85 0.15 90)", // Yellow
       link: "#",
     },
