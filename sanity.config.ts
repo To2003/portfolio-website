@@ -5,6 +5,7 @@ import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schemaTypes } from "./sanity/schemaTypes";
 
 export default defineConfig({
+  basePath: "/admin",
   name: "default",
   title: "Portfolio Tomas Aguilar",
 
